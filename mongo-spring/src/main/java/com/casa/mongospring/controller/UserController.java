@@ -38,4 +38,10 @@ public class UserController {
                         .buildAndExpand(user.getId()).toUri()
         ).body(userService.createUser(user));
     }
+
+    @RequestMapping(method=RequestMethod.DELETE, value = "/user/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
 }
