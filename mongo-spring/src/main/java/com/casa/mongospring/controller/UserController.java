@@ -1,5 +1,6 @@
 package com.casa.mongospring.controller;
 
+import com.casa.mongospring.dto.UserDTO;
 import com.casa.mongospring.model.User;
 import com.casa.mongospring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,8 @@ public class UserController {
     }
 
     @RequestMapping(method=RequestMethod.GET, value = "/user")
-    public ResponseEntity<List<User>> getUser() {
-        return ResponseEntity.ok(userService.findAllUsers());
+    public ResponseEntity<List<UserDTO>> getUser() {
+        List<User> users = userService.findAllUsers();
+        return ResponseEntity.ok(userService.convertToDTO(users));
     }
 }

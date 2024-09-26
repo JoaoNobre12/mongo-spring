@@ -1,5 +1,6 @@
 package com.casa.mongospring.service;
 
+import com.casa.mongospring.dto.UserDTO;
 import com.casa.mongospring.model.User;
 import com.casa.mongospring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,13 @@ public class UserService {
 
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    public List<UserDTO> convertToDTO(List<User> users) {
+        List<UserDTO> userDTOS = new java.util.ArrayList<>();
+        for (User user : users) {
+            userDTOS.add(new UserDTO(user));
+        }
+        return userDTOS;
     }
 }
