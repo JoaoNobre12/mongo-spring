@@ -30,4 +30,12 @@ public class UserController {
     public ResponseEntity<UserDTO> getUserById(@PathVariable String id) {
         return ResponseEntity.ok(userService.findUserById(id));
     }
+
+    @RequestMapping(method=RequestMethod.POST, value = "/user")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        return ResponseEntity.created(
+                org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                        .buildAndExpand(user.getId()).toUri()
+        ).body(userService.createUser(user));
+    }
 }

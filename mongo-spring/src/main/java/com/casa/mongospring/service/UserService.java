@@ -37,4 +37,8 @@ public class UserService {
         );
         return new UserDTO(user);
     }
+
+    public User createUser(User user) {
+        return userRepository.insert(user);
+    }
 }
