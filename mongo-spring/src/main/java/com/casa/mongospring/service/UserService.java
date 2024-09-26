@@ -3,6 +3,7 @@ package com.casa.mongospring.service;
 import com.casa.mongospring.dto.UserDTO;
 import com.casa.mongospring.model.User;
 import com.casa.mongospring.repository.UserRepository;
+import com.casa.mongospring.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,12 @@ public class UserService {
             userDTOS.add(new UserDTO(user));
         }
         return userDTOS;
+    }
+
+    public UserDTO findUserById(String id) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new ObjectNotFoundException("User not found", id)
+        );
+        return new UserDTO(user);
     }
 }

@@ -5,9 +5,7 @@ import com.casa.mongospring.model.User;
 import com.casa.mongospring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +24,10 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> getUser() {
         List<User> users = userService.findAllUsers();
         return ResponseEntity.ok(userService.convertToDTO(users));
+    }
+
+    @RequestMapping(method=RequestMethod.GET, value = "/user/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable String id) {
+        return ResponseEntity.ok(userService.findUserById(id));
     }
 }

@@ -1,8 +1,13 @@
 package com.casa.mongospring.service.exception;
 
-public class ObjectNotFoundException extends RuntimeException {
+import lombok.Getter;
 
-    public ObjectNotFoundException(String msg) {
+@Getter
+public class ObjectNotFoundException extends RuntimeException {
+    private final String id;
+
+    public ObjectNotFoundException(String msg, String id) {
         super(msg);
+        this.id = id;
     }
 }
