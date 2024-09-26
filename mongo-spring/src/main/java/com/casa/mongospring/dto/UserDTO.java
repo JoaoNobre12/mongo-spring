@@ -12,12 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO implements java.io.Serializable {
-
+    private String id;
     private String name;
     private String email;
 
     public UserDTO(User user) {
         this.name = user.getName();
         this.email = user.getEmail();
+        this.id = user.getId();
     }
 }

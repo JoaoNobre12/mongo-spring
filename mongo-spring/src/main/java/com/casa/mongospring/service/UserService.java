@@ -45,4 +45,13 @@ public class UserService {
     public void deleteUser(String id) {
         userRepository.deleteById(id);
     }
+
+    public User updateUser(User user, String id) {
+        User newUser = userRepository.findById(user.getId()).orElseThrow(
+                () -> new ObjectNotFoundException("User not found", id)
+        );
+        newUser.setName(user.getName());
+        newUser.setEmail(user.getEmail());
+        return userRepository.save(newUser);
+    }
 }
