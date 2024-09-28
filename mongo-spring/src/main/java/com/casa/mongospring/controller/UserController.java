@@ -2,6 +2,7 @@ package com.casa.mongospring.controller;
 
 import com.casa.mongospring.dto.UserDTO;
 import com.casa.mongospring.model.User;
+import com.casa.mongospring.model.WebPost;
 import com.casa.mongospring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,5 +49,10 @@ public class UserController {
     @RequestMapping(method=RequestMethod.PUT, value = "/user/{id}")
     public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable String id) {
         return ResponseEntity.ok(userService.updateUser(user, id));
+    }
+
+    @RequestMapping(method=RequestMethod.GET, value = "/user/{id}/posts")
+    public ResponseEntity<List<WebPost>> getWebPostByUserId(@PathVariable String id) {
+        return ResponseEntity.ok(userService.findUserById(id).getPosts());
     }
 }

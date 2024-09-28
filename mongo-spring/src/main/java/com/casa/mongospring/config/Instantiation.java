@@ -8,9 +8,7 @@ import com.casa.mongospring.repository.WebPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
-import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
