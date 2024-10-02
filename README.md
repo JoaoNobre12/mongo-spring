@@ -10,7 +10,7 @@ This application is a simple Spring Boot REST API that manages Users and Posts s
 - Docker (optional, if running MongoDB via a container)
 
 ## Configure MongoDB Connection
-In the `application.properties` (or `application.yml`) file located in `src/main/resources`, configure the MongoDB connection as follows:
+In the `application.properties` (or `application.yml`) file located in `src/main/resources`, configure the MongoDB connection.
 
 ## Conclusion
 This Spring Boot application provides REST APIs to manage users and their posts stored in MongoDB. Use the provided endpoints to create, retrieve, update, and delete users and posts, along with search functionalities for posts.
