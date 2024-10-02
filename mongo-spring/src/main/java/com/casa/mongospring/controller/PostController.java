@@ -4,9 +4,11 @@ import com.casa.mongospring.controller.util.URL;
 import com.casa.mongospring.model.WebPost;
 import com.casa.mongospring.service.WebPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -49,5 +51,16 @@ public class PostController {
     public ResponseEntity<List<WebPost>> getAllPosts(@RequestParam(value = "text", defaultValue = "") String text) {
         text = URL.decode(text);
         return ResponseEntity.ok(webPostService.findPostsByTitleContaining(text));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/fullsearch")
+    public ResponseEntity<List<WebPost>> fullSearch(@RequestParam(value = "text", defaultValue = "") String text,
+                             @RequestParam(value = "from", defaultValue = "") String from,
+                             @RequestParam(value = "to", defaultValue = "") String to) {
+
+        Date dateFrom = URL.convertDate(from, new Date());
+        Date dateTo = URL.convertDate(to, new Date());
+
+        return ResponseEntity.ok(webPostService.fullSearch(text, dateFrom, dateTo));
     }
 }

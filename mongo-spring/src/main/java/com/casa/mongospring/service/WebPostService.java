@@ -6,6 +6,7 @@ import com.casa.mongospring.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,5 +39,10 @@ public class WebPostService {
 
     public List<WebPost> findPostsByTitleContaining(String title) {
         return webPostRepository.findByTitleContaining(title);
+    }
+
+    public List<WebPost> fullSearch(String title, Date from, Date to) {
+        to = new Date(to.getTime() + 24 * 60 * 60 * 1000);
+        return webPostRepository.fullSearch(title, from, to);
     }
 }
