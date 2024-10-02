@@ -1,6 +1,7 @@
 package com.casa.mongospring.config;
 
 import com.casa.mongospring.dto.AuthorDTO;
+import com.casa.mongospring.dto.CommentDTO;
 import com.casa.mongospring.model.User;
 import com.casa.mongospring.model.WebPost;
 import com.casa.mongospring.repository.UserRepository;
@@ -47,6 +48,12 @@ public class Instantiation implements CommandLineRunner {
         WebPost post3 = new WebPost(
                 null, "Java Best Practices", sdf.parse("13/05/2023"),
                 "otimo guia para iniciantes aprender java", new AuthorDTO(user1));
+
+        CommentDTO commentDTO1 = new CommentDTO(sdf.parse("21/03/2018"), "Boa viagem", new AuthorDTO(user2));
+        CommentDTO commentDTO2 = new CommentDTO(sdf.parse("23/04/2018"), "Muito legal!", new AuthorDTO(user1));
+
+        post1.getComments().add(commentDTO1);
+        post2.getComments().add(commentDTO2);
 
         webPostRepository.saveAll(List.of(post1, post2, post3));
 
