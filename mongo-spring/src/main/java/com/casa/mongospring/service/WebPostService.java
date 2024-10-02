@@ -36,5 +36,7 @@ public class WebPostService {
         webPostRepository.deleteById(id);
     }
 
-
+    public List<WebPost> findPostsByTitleContaining(String title) {
+        return webPostRepository.findByTitleContaining(title);
+    }
 }

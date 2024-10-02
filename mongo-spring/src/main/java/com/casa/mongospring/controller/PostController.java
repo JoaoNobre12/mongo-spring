@@ -1,5 +1,6 @@
 package com.casa.mongospring.controller;
 
+import com.casa.mongospring.controller.util.URL;
 import com.casa.mongospring.model.WebPost;
 import com.casa.mongospring.service.WebPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,11 @@ public class PostController {
     public ResponseEntity<Void> deleteWebPost(@PathVariable String id) {
         webPostService.deletePost(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/titlesearch")
+    public ResponseEntity<List<WebPost>> getAllPosts(@RequestParam(value = "text", defaultValue = "") String text) {
+        text = URL.decode(text);
+        return ResponseEntity.ok(webPostService.findPostsByTitleContaining(text));
     }
 }
